@@ -1,6 +1,6 @@
 ---
 title: "Retour d’expérience sur 3 ans de «\_No Estimate\_»"
-date: '2023-03-22'
+date: '2023-03-22T09:32:05'
 category: Agile
 categories:
   - Agile
@@ -32,9 +32,9 @@ Pendant plus de 6 mois, tout allait bien, notre travail en Scrum était fluide e
 
 Puis petit à petit, quelques problèmes sont apparus :
 
--   **Augmentation du stress dans l’équipe** : ayant tous une conscience professionnelle établie, l’engagement de livraison du contenu d’un Sprint est devenu un stress. Améliorer nos estimations et être plus productif lors du Sprint sont devenus des préoccupations centrales.
--   **Baisse de la qualité** : cette pression a eu pour effet de clôturer les user stories de fin de Sprint avec beaucoup moins d’exigences de qualité que celles de l’ouverture des Sprints.
--   **Fatigue** : le stress + la dette à résorber ont nécessité plus d’investissement de la part de l’équipe et donc un rythme non soutenable.
+- **Augmentation du stress dans l’équipe** : ayant tous une conscience professionnelle établie, l’engagement de livraison du contenu d’un Sprint est devenu un stress. Améliorer nos estimations et être plus productif lors du Sprint sont devenus des préoccupations centrales.
+- **Baisse de la qualité** : cette pression a eu pour effet de clôturer les user stories de fin de Sprint avec beaucoup moins d’exigences de qualité que celles de l’ouverture des Sprints.
+- **Fatigue** : le stress + la dette à résorber ont nécessité plus d’investissement de la part de l’équipe et donc un rythme non soutenable.
 
 Ces problèmes se sont accentués progressivement notamment car l’équipe s’est mise à estimer de moins en moins bien. La raison ? Le recrutement massif.
 
@@ -96,18 +96,18 @@ Voici un résumé des avantages / inconvénients selon mon expérience.
 
 ✅ Avantages :
 
--   Permet de gagner du temps en ne passant pas des heures à estimer les tâches, ni à tenter d’améliorer le processus d’estimation
--   Supprime la pression de respecter des engagements de livraison qui peuvent être difficiles à tenir avec des estimations imprécises et des équipes changeantes
--   Met l’accent sur la priorisation des fonctionnalités qui apportent le plus de valeur à l’utilisateur final
--   Favorise le découpage fin des user stories et l’expression des critères d’acceptation
--   Améliore l’acceptation au changement lors du passage en flux (Kanban)
+- Permet de gagner du temps en ne passant pas des heures à estimer les tâches, ni à tenter d’améliorer le processus d’estimation
+- Supprime la pression de respecter des engagements de livraison qui peuvent être difficiles à tenir avec des estimations imprécises et des équipes changeantes
+- Met l’accent sur la priorisation des fonctionnalités qui apportent le plus de valeur à l’utilisateur final
+- Favorise le découpage fin des user stories et l’expression des critères d’acceptation
+- Améliore l’acceptation au changement lors du passage en flux (Kanban)
 
 ➖ Inconvénients :
 
--   Peut entraîner une certaine incertitude dans la planification et l’organisation du travail
--   Nécessite une communication plus étroite avec le Product Manager pour s’assurer que les priorités sont correctement définies
--   Peut être moins adapté aux projets qui impliquent une collaboration étroite avec des partenaires externes qui ont besoin de prévisions précises (contractualisation)
--   Nécessiter une certaine expérience et maturité de la part de l’équipe pour fonctionner efficacement (professionnalisme et proactivité)
+- Peut entraîner une certaine incertitude dans la planification et l’organisation du travail
+- Nécessite une communication plus étroite avec le Product Manager pour s’assurer que les priorités sont correctement définies
+- Peut être moins adapté aux projets qui impliquent une collaboration étroite avec des partenaires externes qui ont besoin de prévisions précises (contractualisation)
+- Nécessiter une certaine expérience et maturité de la part de l’équipe pour fonctionner efficacement (professionnalisme et proactivité)
 
 ## Conclusion
 

@@ -1,6 +1,6 @@
 ---
 title: 'Persister un pur modèle métier : pas si simple !'
-date: '2015-11-01'
+date: '2015-11-01T23:13:00'
 category: Clean code
 categories:
   - Clean code
@@ -87,10 +87,10 @@ Nous considérerons aussi que le catalogue de prix est un simple dictionnaire en
 
 Quelques règles métiers sont implémentées :
 
--   L’ajout d’un produit nécessite une quantité valide (> 0)
--   L’ajout d’un produit déjà existant incrémente sa quantité
--   L’ajout, la suppression d’un produit et la soumission de la commande ne peuvent se faire que si la commande n’a pas déjà été soumise.
--   Le montant total est cohérent avec l’ensemble des produits ajoutés à la commande en fonction du catalogue.
+- L’ajout d’un produit nécessite une quantité valide (> 0)
+- L’ajout d’un produit déjà existant incrémente sa quantité
+- L’ajout, la suppression d’un produit et la soumission de la commande ne peuvent se faire que si la commande n’a pas déjà été soumise.
+- Le montant total est cohérent avec l’ensemble des produits ajoutés à la commande en fonction du catalogue.
 
 Une implémentation de cette commande sans aucune notion de persistance peut se faire de la manière suivante :
 
@@ -181,11 +181,11 @@ Une implémentation de cette commande sans aucune notion de persistance peut se 
 
   Ce que nous pouvons dire de cette implémentation de la classe *Order* :
 
--   Elle encapsule parfaitement ses états internes
--   Elle expose des méthodes pour effectuer des actions sur l’objet en tenant compte des règles métiers
--   Elle expose des propriétés publiques en lecture seule pour lire certains états.
+- Elle encapsule parfaitement ses états internes
+- Elle expose des méthodes pour effectuer des actions sur l’objet en tenant compte des règles métiers
+- Elle expose des propriétés publiques en lecture seule pour lire certains états.
 
-Maintenant, nous souhaitons persister les instances de cette classe.  
+Maintenant, nous souhaitons persister les instances de cette classe.<br />
 
 ## Persistance. Et là … problème …
 
@@ -193,15 +193,15 @@ Que souhaitons-nous persister ?
 
 Probablement les données internes de l’objet *Order* et de ses sous-objets *OrderLine* :
 
--   Id
--   OrderStatus
--   SubmitDate
--   TotalCost
--   OrderLines
-    -   OrderId
-    -   Product
-    -   Quantity
-    -   CreationDate
+- Id
+- OrderStatus
+- SubmitDate
+- TotalCost
+- OrderLines
+    - OrderId
+    - Product
+    - Quantity
+    - CreationDate
 
 <blockquote class="large">
 
@@ -289,10 +289,10 @@ Les instances des classes *Order* et *OrderLine,* définies plus haut, ne peuv
 
 Cette problématique m’a beaucoup tracassé et j’ai longtemps réfléchi, parcouru de nombreux articles sur le web, expérimenté plusieurs approches … De mes réflexions sont ressorties différentes solutions que j’aborderais dans les prochains articles.
 
--   [Faire un compromis sur la conception objet](/compromis-sur-la-conception-objet/)
--   [Le pattern State-Interface](/le-pattern-state-interface/)
--   [Le pattern State-Snapshot](/le-pattern-state-snapshot/)
--   L’event sourcing
+- [Faire un compromis sur la conception objet](/compromis-sur-la-conception-objet/)
+- [Le pattern State-Interface](/le-pattern-state-interface/)
+- [Le pattern State-Snapshot](/le-pattern-state-snapshot/)
+- L’event sourcing
 
 ## La suite
 

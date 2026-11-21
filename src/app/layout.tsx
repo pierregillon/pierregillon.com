@@ -7,21 +7,21 @@ import "./globals.css";
 
 // Mêmes fichiers de police que l'ancien site (hébergés localement).
 const oswald = localFont({
-  src: "./fonts/Oswald-VariableFont_wght.ttf",
+  src: "./fonts/Oswald-VariableFont_wght.woff2",
   variable: "--font-oswald",
   weight: "200 700",
   display: "swap",
 });
 
 const poppins = localFont({
-  src: "./fonts/Poppins-Regular.ttf",
+  src: "./fonts/Poppins-Regular.woff2",
   variable: "--font-poppins",
   weight: "400",
   display: "swap",
 });
 
 const openSans = localFont({
-  src: "./fonts/OpenSans-VariableFont_wdthwght.ttf",
+  src: "./fonts/OpenSans-VariableFont_wdthwght.woff2",
   variable: "--font-open-sans",
   weight: "300 800",
   display: "swap",

@@ -1,6 +1,6 @@
 ---
 title: 'Persister un pur modèle métier : compromis sur la conception objet'
-date: '2015-11-01'
+date: '2015-11-01T23:25:00'
 category: Clean code
 categories:
   - Clean code
@@ -22,11 +22,11 @@ Cet article technique fait partie de la série qui porte sur la question : « *
 
 Voici les autres articles :
 
--   [Introduction](/persister-un-pur-domain-model-pas-si-simple/)
--   **Faire un compromis sur la conception objet**
--   [Le pattern State-Interface](/le-pattern-state-interface/)
--   [Le pattern State-Snapshot](/le-pattern-state-snapshot/)
--   L’Event Sourcing
+- [Introduction](/persister-un-pur-domain-model-pas-si-simple/)
+- **Faire un compromis sur la conception objet**
+- [Le pattern State-Interface](/le-pattern-state-interface/)
+- [Le pattern State-Snapshot](/le-pattern-state-snapshot/)
+- L’Event Sourcing
 
 ## Un compromis
 
@@ -137,14 +137,14 @@ Cette solution est très simple et fonctionnelle. Nous pouvons désormais persis
 
 **Avantages** :
 
--   Simplicité d’implémentation = gain de temps
--   Un seul modèle pour la logique métier et la persistance : simplicité, pas de *mapping* vers d’autres modèles
+- Simplicité d’implémentation = gain de temps
+- Un seul modèle pour la logique métier et la persistance : simplicité, pas de *mapping* vers d’autres modèles
 
 **Inconvénients** :
 
--   Les états internes peuvent désormais être modifié depuis l’extérieur, sans évaluer les règles métiers définies dans les méthodes.
--   Notre modèle métier devient un modèle de persistance, couplé à la structure de la table Order.
--   Les méta-données requises par les ORM pour permettre la persistance sont ajoutées directement dans les modèles métiers et viennent le complexifier.
+- Les états internes peuvent désormais être modifié depuis l’extérieur, sans évaluer les règles métiers définies dans les méthodes.
+- Notre modèle métier devient un modèle de persistance, couplé à la structure de la table Order.
+- Les méta-données requises par les ORM pour permettre la persistance sont ajoutées directement dans les modèles métiers et viennent le complexifier.
 
 ## Conclusion
 

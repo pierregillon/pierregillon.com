@@ -8,7 +8,7 @@ export type PostMeta = {
   /** Nom du fichier sans extension : c'est aussi l'URL de l'article (/slug/) */
   slug: string;
   title: string;
-  /** Date de publication au format AAAA-MM-JJ */
+  /** Date de publication : AAAA-MM-JJ, ou AAAA-MM-JJTHH:MM:SS pour départager deux articles du même jour */
   date: string;
   /** Catégorie affichée sur la vignette */
   category: string;
@@ -34,7 +34,7 @@ function loadPosts(): Post[] {
     .filter((file) => file.endsWith(".md"))
     .map((file) => {
       const { data, content } = matter(fs.readFileSync(path.join(POSTS_DIRECTORY, file), "utf8"));
-      const date = data.date instanceof Date ? data.date.toISOString().slice(0, 10) : String(data.date);
+      const date = data.date instanceof Date ? data.date.toISOString().slice(0, 19) : String(data.date);
       const categories: string[] = data.categories ?? (data.category ? [data.category] : []);
       return {
         slug: file.replace(/\.md$/, ""),
@@ -94,6 +94,6 @@ const MONTHS = [
 
 /** "2019-08-23" → "août 23, 2019" (format d'affichage de l'ancien site). */
 export function formatPostDate(date: string) {
-  const [year, month, day] = date.split("-").map(Number);
+  const [year, month, day] = date.slice(0, 10).split("-").map(Number);
   return `${MONTHS[month - 1]} ${day}, ${year}`;
 }

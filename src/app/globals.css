@@ -370,3 +370,207 @@
     transform: none !important;
   }
 }
+
+/* ---------- Contenu des articles de blog (HTML généré depuis le Markdown) ---------- */
+
+.post-content {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: #000;
+  text-align: justify;
+  overflow-wrap: break-word;
+
+  @variant lg {
+    font-size: 16px;
+  }
+
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  & p {
+    margin-block: 0 0.9rem;
+  }
+
+  & h2,
+  & h3,
+  & h4,
+  & h5 {
+    margin-block: 0.5rem 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  & h2 {
+    font-size: 2rem;
+  }
+  & h3 {
+    font-size: 1.75rem;
+  }
+  & h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-ink);
+    @variant md {
+      font-size: 24px;
+    }
+  }
+  & h5 {
+    font-size: 1.25rem;
+  }
+
+  & a {
+    color: var(--color-violet);
+  }
+  & a:hover {
+    color: var(--color-ink);
+  }
+
+  & ul,
+  & ol {
+    padding-left: 40px;
+  }
+  & ul {
+    list-style: disc;
+  }
+  & ul ul {
+    list-style: circle;
+  }
+  & ol {
+    list-style: decimal;
+  }
+
+  & img {
+    display: inline;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Images : <figure class="align-center"> ou <figure class="align-right"> */
+  & figure {
+    margin: 0 0 1em;
+  }
+  & figure.align-center {
+    display: table;
+    margin-inline: auto;
+    text-align: center;
+  }
+  & figure.align-right {
+    display: table;
+    float: right;
+    margin: 0 0 1em 1em;
+  }
+  & figcaption {
+    display: table-caption;
+    caption-side: bottom;
+    margin-block: 0.5rem 1rem;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+    color: #333;
+    text-align: center;
+  }
+
+  /* Encadré coloré : <div class="callout" style="background-color:#eaf9ff"> */
+  & .callout {
+    margin-bottom: 0.9rem;
+    padding: 1.25em 2.375em;
+    background-color: #eaf9ff;
+  }
+  & .callout > :last-child {
+    margin-bottom: 0;
+  }
+
+  /* Citations : "> texte" ou <blockquote class="large"> pour une citation mise en avant */
+  & blockquote {
+    margin: 1em 40px;
+  }
+  & blockquote > :last-child {
+    margin-bottom: 0;
+  }
+  & blockquote.large {
+    margin: 1em 40px;
+    padding-inline: 1em;
+  }
+  & blockquote.large p {
+    font-size: 1.5em;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  & table {
+    width: 100%;
+    margin-bottom: 0.9rem;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  & th,
+  & td {
+    padding: 0.5em 0.75em;
+    border: 1px solid #ccc;
+  }
+
+  & hr {
+    margin-block: 1.5rem;
+    border-color: #ccc;
+  }
+
+  & :not(pre) > code {
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    background-color: var(--color-surface);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+
+  /* Blocs de code : même rendu que l'ancien blog (numéros de ligne, liseré vert) */
+  & .code-block {
+    margin-block: 1em;
+    background-color: #fff;
+    text-align: left;
+  }
+  & .code-block pre {
+    margin: 0;
+    padding: 0.5em 1em;
+    overflow-x: auto;
+    font-family: Monaco, Consolas, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.1;
+    tab-size: 4;
+  }
+  & .code-block code {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+    counter-reset: line;
+  }
+  & .code-block .line {
+    display: inline-block;
+    min-width: 100%;
+  }
+  & .code-block .line::before {
+    content: counter(line);
+    counter-increment: line;
+    display: inline-block;
+    width: calc(var(--line-digits, 2) * 1ch);
+    box-sizing: content-box;
+    margin-right: 1em;
+    padding-right: 0.5em;
+    border-right: 3px solid #6ce26c;
+    color: #afafaf;
+    font-style: normal;
+    font-weight: 400;
+    text-align: right;
+  }
+  & .code-block .line.highlighted {
+    background-color: #e0e0e0;
+  }
+  & .code-block .line.highlighted::before {
+    background-color: #6ce26c;
+    color: #fff;
+  }
+}

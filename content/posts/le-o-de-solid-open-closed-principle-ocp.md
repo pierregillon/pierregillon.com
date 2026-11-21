@@ -1,6 +1,6 @@
 ---
 title: 'Le « O » de SOLID : Open/Closed Principle (OCP)'
-date: '2013-05-29'
+date: '2013-05-29T19:17:00'
 category: Clean code
 categories:
   - Clean code
@@ -22,10 +22,10 @@ On retrouve dans cette phrase un paradoxe intéressant : les entités doivent ê
 
 Lorsqu’on souhaite effectuer des modifications sur un code existant pour ajouter de la fonctionnalité, on « *étend* » le concept, en ajoutant du nouveau code, par héritage et polymorphisme. On ne modifie en aucun cas le concept originel pour arriver à notre besoin. Si on le faisait, on risquerait de le rendre :
 
--   **fragile** : remplacer du code déjà *éprouvé* par du nouveau code non *éprouvé* fragilise le concept
--   **rigide** : l’ajout de code spécifique rigidifie le concept et peut même ne plus respecter le [SRP](http://pgillon.blogspot.fr/2013/05/le-s-de-solid-single-responsability.html)
--   **non prévisible** : des effets de bords importants peuvent apparaître
--   **non réutilisable** : on risque de spécialiser le concept et de le rendre moins voir non réutilisable
+- **fragile** : remplacer du code déjà *éprouvé* par du nouveau code non *éprouvé* fragilise le concept
+- **rigide** : l’ajout de code spécifique rigidifie le concept et peut même ne plus respecter le [SRP](http://pgillon.blogspot.fr/2013/05/le-s-de-solid-single-responsability.html)
+- **non prévisible** : des effets de bords importants peuvent apparaître
+- **non réutilisable** : on risque de spécialiser le concept et de le rendre moins voir non réutilisable
 
 ## Exemple
 

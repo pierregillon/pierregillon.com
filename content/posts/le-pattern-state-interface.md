@@ -1,6 +1,6 @@
 ---
 title: 'Persister un pur modèle métier : le pattern State-Interface'
-date: '2015-11-01'
+date: '2015-11-01T23:32:00'
 category: Clean code
 categories:
   - Clean code
@@ -9,25 +9,25 @@ cover: /images/blog/jorgen-haland-4y-og-rb-b-i4-unsplash.webp
 excerpt: "Dans le précédent article, nous avons vu comment mettre en place un compromis sur la conception objet afin d’obtenir rapidement de la persistance sur des applications dites court terme. Nous allons maintenant aborder un nouveau pattern : le State-Interface\_qui permet la persistance de modèles parfaitement encapsulés, notamment dans le contexte d’applications plus importantes."
 ---
 
-Dans le [précédent article](http://box5594.temp.domains/~pierregi/persister-un-pur-domain-model-compromis-sur-la-conception-objet/), nous avons vu comment mettre en place un compromis sur la conception objet afin d’obtenir rapidement de la persistance sur des applications dites *court terme*. Nous allons maintenant aborder un nouveau pattern : le *State-Interface* qui permet la persistance de modèles parfaitement encapsulés, notamment dans le contexte d’applications plus importantes.
+Dans le [précédent article](/compromis-sur-la-conception-objet/), nous avons vu comment mettre en place un compromis sur la conception objet afin d’obtenir rapidement de la persistance sur des applications dites *court terme*. Nous allons maintenant aborder un nouveau pattern : le *State-Interface* qui permet la persistance de modèles parfaitement encapsulés, notamment dans le contexte d’applications plus importantes.
 
 ## Introduction
 
 Cet article technique fait partie de la série qui porte sur la question : « *Comment persister un modèle métier sans devoir simplifier sa conception objet et sans devoir se plier aux conventions des ORMs* ? ». Voici les autres articles :
 
--   [Introduction](/persister-un-pur-domain-model-pas-si-simple/)
--   [Faire un compromis sur la conception objet](/compromis-sur-la-conception-objet/)
--   **Le pattern State-Interface**
--   [Le pattern State-Snapshot](/le-pattern-state-snapshot/)
--   L’Event Sourcing
+- [Introduction](/persister-un-pur-domain-model-pas-si-simple/)
+- [Faire un compromis sur la conception objet](/compromis-sur-la-conception-objet/)
+- **Le pattern State-Interface**
+- [Le pattern State-Snapshot](/le-pattern-state-snapshot/)
+- L’Event Sourcing
 
 ## Le pattern *State-Interface*
 
 Ce pattern est composé de 3 concepts :
 
--   Un ***Domain Model*** : classe qui contient de la logique métier lié à un domaine
--   Un ***Persistent Model*** : classe responsable de la persistance des informations du domaine
--   Une interface *IModelState* représentant les états commun entre *Domain Model* et *Persistent Model,* c’est à dire : **les états du domaine à persister**.
+- Un ***Domain Model*** : classe qui contient de la logique métier lié à un domaine
+- Un ***Persistent Model*** : classe responsable de la persistance des informations du domaine
+- Une interface *IModelState* représentant les états commun entre *Domain Model* et *Persistent Model,* c’est à dire : **les états du domaine à persister**.
 
 Voici un petit schéma pour résumer les interactions de ces acteurs.
 
@@ -38,10 +38,10 @@ Voici un petit schéma pour résumer les interactions de ces acteurs.
 
 Le pattern *State-Interface* se décompose en 4 étapes :
 
-1.  **Déterminer** les données ou états du domaine à persister et en faire une interface *IModelState*
-2.  **Implémenter explicitement** l’interface *IModelState* dans le ***Domain Model***
-3.  **Implémenter normalement** (implicitement) l’interface *IModelState* dans un ***Persistant Model***
-4.  **Implémenter la copie d’information** d’un *IModelState* à un autre *IModelState*
+1. **Déterminer** les données ou états du domaine à persister et en faire une interface *IModelState*
+2. **Implémenter explicitement** l’interface *IModelState* dans le ***Domain Model***
+3. **Implémenter normalement** (implicitement) l’interface *IModelState* dans un ***Persistant Model***
+4. **Implémenter la copie d’information** d’un *IModelState* à un autre *IModelState*
 
 ## Adaptons l’exemple
 
@@ -221,8 +221,8 @@ Par injection, nous utilisons l’interface ***IOrderMapper***, qui nous permet 
 
 Pour implémenter cette interface, plusieurs solutions :
 
--   [AutoMapper](http://automapper.org/) : petite librairie permettant de faire de la copie d’objets.
--   Copie à la main via une méthode d’extension sur ’interface *IOrderStates* et *IOrderLineStates*
+- [AutoMapper](http://automapper.org/) : petite librairie permettant de faire de la copie d’objets.
+- Copie à la main via une méthode d’extension sur ’interface *IOrderStates* et *IOrderLineStates*
 
 Ce code technique n’est pas très intéressant. Si vous souhaitez en savoir plus, vous pouvez jeter un coup d’œil sur l’exemple complet (Cf fin de l’article). Un très bon [article de blog](http://aurelien.boudoux.fr/2014/09/la-transformation-de-donnees-pierre.html) d’[Aurélien Boudoux](https://twitter.com/AurelienBoudoux) présente une manière de faire grâce à une interface *IMergeableCopy* qui utilise la *reflection* pour trouver les champs d’une interface à copier.
 
@@ -230,15 +230,15 @@ Ce code technique n’est pas très intéressant. Si vous souhaitez en savoir pl
 
 **Avantages** :
 
--   La classe métier ***Order*** reste parfaitement encapsulée et intègre. On peut concevoir son métier sans contraintes.
--   Il y a une séparation claire entre le modèle du métier et le modèle de persistance (*Domain model* vs *Persistant model*)
--   Les méta-données requises par les ORM pour permettre la persistance sont ajoutées dans les *Persistent Models* et ne polluent pas nos *Domain Models*.
+- La classe métier ***Order*** reste parfaitement encapsulée et intègre. On peut concevoir son métier sans contraintes.
+- Il y a une séparation claire entre le modèle du métier et le modèle de persistance (*Domain model* vs *Persistant model*)
+- Les méta-données requises par les ORM pour permettre la persistance sont ajoutées dans les *Persistent Models* et ne polluent pas nos *Domain Models*.
 
 **Inconvénients** :
 
--   Une interface est sensée représenter un comportement. L’utiliser pour masquer l’état interne d’un objet n’est pas très propre.
--   Le code d’implémentation implicite n’est pas très lisible dans l’objet métier Order.
--   Une partie de la stratégie repose sur une copie de données d’une interface à une autre, un code technique à peu de valeur ajoutée.
+- Une interface est sensée représenter un comportement. L’utiliser pour masquer l’état interne d’un objet n’est pas très propre.
+- Le code d’implémentation implicite n’est pas très lisible dans l’objet métier Order.
+- Une partie de la stratégie repose sur une copie de données d’une interface à une autre, un code technique à peu de valeur ajoutée.
 
 ## Conclusion
 

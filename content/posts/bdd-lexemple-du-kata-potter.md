@@ -1,6 +1,6 @@
 ---
 title: 'Le Kata Potter, illustré en Behaviour Driven Developpment'
-date: '2013-10-02'
+date: '2013-10-02T18:29:00'
 category: BDD
 categories:
   - BDD
@@ -43,17 +43,17 @@ Vous trouverez l’ensemble du code source de l’exercice sur Github ici : [htt
 
 D’après l’énoncé, voici les règles réduites que l’on peut extraire :  
 
-1.  [Un livre coûte](#scenario1) **[8 euros](#scenario1)**
-2.  [L’achat de 1 livre n’apporte](#scenario2) **[aucune réduction](#scenario2)**
-3.  [L’achat de 2 livres différents apporte](#scenario3) **[une réduction de 5%](#scenario3)**
-4.  [L’achat de 3 livres différents apporte](#scenario4) **[une réduction de 10%](#scenario4)**
-5.  [L’achat de 4 livres différents apporte](#scenario56) **[une réduction de 20%](#scenario56)**
-6.  [L’achat de 5 livres différents apporte](#scenario56) **[une réduction de 25%](#scenario56)**
-7.  [Lors de l’achat d’un ensemble de livres, et pour avoir](#scenario7) **[la plus petite réduction](#scenario7)**[, ces livres sont regroupés dans différents lots auxquels on applique la réduction appropriée.](#scenario7)
+1. [Un livre coûte](#scenario1) **[8 euros](#scenario1)**
+2. [L’achat de 1 livre n’apporte](#scenario2) **[aucune réduction](#scenario2)**
+3. [L’achat de 2 livres différents apporte](#scenario3) **[une réduction de 5%](#scenario3)**
+4. [L’achat de 3 livres différents apporte](#scenario4) **[une réduction de 10%](#scenario4)**
+5. [L’achat de 4 livres différents apporte](#scenario56) **[une réduction de 20%](#scenario56)**
+6. [L’achat de 5 livres différents apporte](#scenario56) **[une réduction de 25%](#scenario56)**
+7. [Lors de l’achat d’un ensemble de livres, et pour avoir](#scenario7) **[la plus petite réduction](#scenario7)**[, ces livres sont regroupés dans différents lots auxquels on applique la réduction appropriée.](#scenario7)
 
 <div class="callout" style="background-color:#e7f8ff">
 
-**Remarque :** Pour ceux qui connaissent ce *Coding Dojo*, nous sauterons la partie de regroupement optimum des livres pour atteindre le prix le plus bas. Nous partons du principe que les livres sont regroupés par nombre maximum de différence.  
+**Remarque :** Pour ceux qui connaissent ce *Coding Dojo*, nous sauterons la partie de regroupement optimum des livres pour atteindre le prix le plus bas. Nous partons du principe que les livres sont regroupés par nombre maximum de différence.<br />
 Par exemple : l’achat de 2 tome 1, 2 tome 2, 2 tome 3, 1 tome 4 et 1 tome 5 donne deux regroupements : un groupe \[ **1, 2, 3, 4, 5 \]** et \[ **1, 2, 3 \]**.
 
 </div>
@@ -70,8 +70,8 @@ Tout d’abord, nous devons préparer le fichier « .*feature* ». Une fois Sp
 
 Ce fichier permet de définir une **fonctionnalité**. On trouve deux parties à ce fichier :  
 
--   **L’entête** : elle permet de décrire la fonctionnalité selon les 3 propositions : « En tant que », « Je souhaite », « Pour ». Ces concepts sont similaires à la méthode *Scrum* lors de la description d’une *UserStory*.
--   **Les scénarios** : ce sont l’ensemble des critères d’acceptations qui permettent de savoir si la fonctionnalité est valide. On peut définir autant de scénarios que l’on souhaite ainsi que des exemples de jeu de données. Un scénario représente un cas d’utilisation concret de la fonctionnalité.
+- **L’entête** : elle permet de décrire la fonctionnalité selon les 3 propositions : « En tant que », « Je souhaite », « Pour ». Ces concepts sont similaires à la méthode *Scrum* lors de la description d’une *UserStory*.
+- **Les scénarios** : ce sont l’ensemble des critères d’acceptations qui permettent de savoir si la fonctionnalité est valide. On peut définir autant de scénarios que l’on souhaite ainsi que des exemples de jeu de données. Un scénario représente un cas d’utilisation concret de la fonctionnalité.
 
 Pour l’exemple, j’ai appelé le fichier « *BasketPriceCalculation.feature* ». Il regroupera comme son nom l’indique, l’ensemble des scénarios pour le calcul du prix du panier d’achat. Dans l’entête, nous pouvons décrire la fonctionnalité de la manière suivante :
 
@@ -96,7 +96,7 @@ Le premier scénario à implémenter est :
 
 #### Ecriture du scénario
 
-On définit ici la première notion la plus importante : le **livre**.  
+On définit ici la première notion la plus importante : le **livre**.<br />
 Grâce aux deux mots clés « *Given* » et « *Then* », on peut décrire cette proposition de la manière suivante :
 
 ```text
@@ -105,11 +105,11 @@ Given A book
 Then The book price is 8 euros
 ```
 
-C’est aussi simple que ça.  
-  
+C’est aussi simple que ça.<br />
+<br />
 La proposition « *Given A book* » représente **une précondition** alors que la proposition « *Then The book price is 8 euros* » représente **une post-condition**. La phrase située à droite de « *Scenario:* » est le titre du scénario. C’est ce qui apparaîtra dans l’explorateur de tests.
 
-Comme c’est le premier scénario, nous devons générer le fichier « *Steps* » qui contiendra le code généré. Pour ce faire, faites un clic droit dans le fichier « .*feature* » ->  « *Generate Step Definition* **»**. La fenêtre suivante s’affiche :   
+Comme c’est le premier scénario, nous devons générer le fichier « *Steps* » qui contiendra le code généré. Pour ce faire, faites un clic droit dans le fichier « .*feature* » ->  « *Generate Step Definition* ». La fenêtre suivante s’affiche :   
 
 <figure class="align-center">
   <img src="/images/blog/bdd-generate-step-definition.webp" alt="" width="433" height="327" />
@@ -144,14 +144,14 @@ La magie opère. Nous retrouvons les phrases du scénario que nous avons écrit 
 
 La méthode *ScenarioContext.Current.Pending()* signifie que le test n’est pas implémenté et qu’il sera « *ignoré* ». On remarque que les méthodes générées peuvent être vides ou avec paramètres :  
 
--   La méthode « *GivenABook* » ne prend aucun paramètre.
--   La méthode « *ThenTheBookPriceIsEuros*»  prend un paramètre de type **entier**.
+- La méthode « *GivenABook* » ne prend aucun paramètre.
+- La méthode « *ThenTheBookPriceIsEuros*»  prend un paramètre de type **entier**.
 
   Si l’on lance les tests, on obtient un test jaune qui correspond à un test « *ignoré* ».
 
 <div class="callout" style="background-color:#edfaff">
 
-**Remarque** : Il faut faire très attention à la manière dont on écrit les scénarios. Chaque phrase écrite génère un code qui lui est associée. Les guillemets \[ **« »** \] ou apostrophe \[ ‘’ \] sont considérés comme encadrant une variable. La méthode générée devient donc différente. Dans notre cas, l’utilisation d’un nombre au milieu d’une phrase ajoute automatiquement un paramètre dans la méthode associée.
+**Remarque** : Il faut faire très attention à la manière dont on écrit les scénarios. Chaque phrase écrite génère un code qui lui est associée. Les guillemets \[ « » \] ou apostrophe \[ ‘’ \] sont considérés comme encadrant une variable. La méthode générée devient donc différente. Dans notre cas, l’utilisation d’un nombre au milieu d’une phrase ajoute automatiquement un paramètre dans la méthode associée.
 
 </div>
 
@@ -208,7 +208,7 @@ Bien entendu, si l’on lance le test, on obtient une magnifique couleur rouge :
   <a href="/images/blog/bdd-test-result1.webp"><img src="/images/blog/bdd-test-result1.webp" alt="" width="300" height="153" /></a>
 </figure>
 
-En effet, par défaut le prix du livre est à 0 euros, ce qui fait échouer le test.  
+En effet, par défaut le prix du livre est à 0 euros, ce qui fait échouer le test.<br />
 Pour le faire passer, de la manière la plus simple, il suffit d’initialiser la propriété « *Price* » du livre dans son constructeur :  
 
 ```csharp
@@ -302,7 +302,7 @@ La méthode générée est :
         }
 ```
 
-Pour l’implémenter, il faut ajouter le concept d’opération **d’ajout d’un livre dans la classe «** ***Basket*** **»**. Un exemple d’implémentation serait :
+Pour l’implémenter, il faut ajouter le concept d’opération **d’ajout d’un livre dans la classe «** ***Basket*** ». Un exemple d’implémentation serait :
 
 ```csharp
        [When(@"I add a book to basket")]
@@ -603,7 +603,7 @@ Si l’on relance les tests, tout est ok. Voilà un exemple d’implémentation 
 
 Les deux prochains scénarios à implémenter sont :
 
-> « L’achat de **4** livres différents apporte une réduction de **20%** »  
+> « L’achat de **4** livres différents apporte une réduction de **20%** »<br />
 > « L’achat de **5** livres différents apporte une réduction de **25%** »
 
 #### Ecriture des scénarios
@@ -666,14 +666,14 @@ A ce point, nous avons effectué les 6 premières règles du Kata Potter, intég
 
 Une nouvelle notion apparaît ici : la notion de **lots** de livres. Prenons un exemple pour mieux comprendre. Nous souhaitons acheter :  
 
--   1 livre du tome 1
--   2 livres du tome 2
--   2 livres du tome 3
+- 1 livre du tome 1
+- 2 livres du tome 2
+- 2 livres du tome 3
 
 Pour savoir quelles réductions appliquer, il faut regrouper ces livres dans des lots de livres différents afin d’avoir la plus haute réduction. En effet, plus le nombre de livres différents au sein d’un lot est important, plus la réduction est importante. Nous avons donc :  
 
--   Un lot des tomes **\[ 1, 2, 3 \]** : réduction de 10%
--   Un lot des tomes **\[ 2, 3 \]** : réduction de 5%
+- Un lot des tomes **\[ 1, 2, 3 \]** : réduction de 10%
+- Un lot des tomes **\[ 2, 3 \]** : réduction de 5%
 
 #### Ecriture des scénarios
 
@@ -855,8 +855,8 @@ Fini ?
 
 Non, presque. Red, Green, … ***Refactor*** ! Le code de la méthode « *AddBook* » dans la classe « *Basket* » ne semble pas très propre. Nous pouvons séparer les responsabilités cette méthode en deux:
 
--   La récupération du premier lot de livre disponible
--   La création du lot si nécessaire puis l’ajout du livre
+- La récupération du premier lot de livre disponible
+- La création du lot si nécessaire puis l’ajout du livre
 
 ```csharp
         public void AddBook(Book book)
@@ -889,18 +889,18 @@ L’exercice est terminé.
 
 Ce court exercice a pour but de présenter l’utilisation du « *Behavior Driven Developpement* » sur un exemple concret : le Kata Potter. J’espère vous avoir fait constaté sa puissance notamment grâce à :
 
--   l’écriture de **scénarios très clair, exprimant le besoin métier**
--   l’implémentation du code de l’application via **des tests générés automatiquement et orchestrés** par Specflow
+- l’écriture de **scénarios très clair, exprimant le besoin métier**
+- l’implémentation du code de l’application via **des tests générés automatiquement et orchestrés** par Specflow
 
 Cette  méthode permet de piloter le développement d’une application par le comportement qu’elle doit avoir. Les scénarios permettent de définir précisément ce comportement attendu avec des exemples afin de guider l’implémentation. Ces scénarios sont composés des mots clés « *Given* », « *When* », « *Then* » permettant d’écrire des propositions claires et concises. Le maître mot : la **réutilisabilité** : chaque proposition peut être réutilisée dans d’autres scénarios et même dans d’autres fichiers « *Steps* ».
 
 Récapitulatif des étapes :
 
-1.  Commencer par écrire votre scénario
-2.  Générer une à une les différentes phrases (propositions) du scénario dans le fichier « *Steps* » et tout en les implémentant au fur et à mesure.
-3.  Créer vos objets avec des valeurs par défaut et ne vous concentrez sur le code métier qu’une fois le test rouge.
-4.  Faites tout d’abord une ***lazy implémentation*** des objets testés (objets du domaine) puis faites du *refactoring* pour améliorer le code, tout en conservant les tests au vert. Le terme clé : « **baby steps** » !
-5.  Une fois que le code est propre et fonctionnel, revenez à l’étape 1.
+1. Commencer par écrire votre scénario
+2. Générer une à une les différentes phrases (propositions) du scénario dans le fichier « *Steps* » et tout en les implémentant au fur et à mesure.
+3. Créer vos objets avec des valeurs par défaut et ne vous concentrez sur le code métier qu’une fois le test rouge.
+4. Faites tout d’abord une ***lazy implémentation*** des objets testés (objets du domaine) puis faites du *refactoring* pour améliorer le code, tout en conservant les tests au vert. Le terme clé : « **baby steps** » !
+5. Une fois que le code est propre et fonctionnel, revenez à l’étape 1.
 
 ## Dans mon entreprise
 

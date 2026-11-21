@@ -1,6 +1,6 @@
 ---
 title: 'Le « S » de SOLID : Single Responsability Principe (SRP)'
-date: '2013-05-19'
+date: '2013-05-19T18:19:00'
 category: Clean code
 categories:
   - Clean code
@@ -16,16 +16,16 @@ Si vous développez depuis quelque temps, vous avez forcément déjà entendu pa
 
 ## Définition
 
-**Le principe de responsabilité unique** est un concept phare dans la programmation orientée objet. Il introduit le fait qu’une classe ne doit avoir qu’**une seule responsabilité bien définie**, afin qu’il n’existe qu’**une seule raison pour la modifier**.  
-  
+**Le principe de responsabilité unique** est un concept phare dans la programmation orientée objet. Il introduit le fait qu’une classe ne doit avoir qu’**une seule responsabilité bien définie**, afin qu’il n’existe qu’**une seule raison pour la modifier**.<br />
+<br />
 Tous les jours, dans son travail, le développeur se confronte à des problèmes plus ou moins complexes. Résoudre les problèmes complexes dans leur globalité est très difficile, tant l’effort intellectuel est intense. La seule solution plausible est de **découper le problème compliqué en problèmes plus simples** à appréhender. Dans cette dynamique, le principe **SRP** veut un découpage parfait, c’est-à-dire que chaque problème simple soit résolu par **une classe à responsabilité unique**.
 
 En appliquant consciencieusement cette pratique, le code devient :
 
--   Plus facile à lire et à comprendre (moins de couplages)
--   Plus facile à modifier (corriger, étendre)
--   Plus facile à tester (moins de dépendances)
--   Plus robuste
+- Plus facile à lire et à comprendre (moins de couplages)
+- Plus facile à modifier (corriger, étendre)
+- Plus facile à tester (moins de dépendances)
+- Plus robuste
 
 A noter que l’application de SRP ne se fait que dans le cadre du processus de *refactoring* (amélioration) continue du code. Rarement voir jamais au premier jet !
 
@@ -55,9 +55,9 @@ Souvent, il est facile de trouver plusieurs responsabilités dans **un code long
 
 Cette classe, bien que très simple, est à responsabilités multiples et ne respecte pas le principe SRP. Les fonctionnalités qu’elles assument sont :
 
--   **Initialiser** un contexte de données
--   **Accéder** à la source de données pour obtenir les personnes
--   **Définir** les conditions de sélection d’une personne « v*alide* »
+- **Initialiser** un contexte de données
+- **Accéder** à la source de données pour obtenir les personnes
+- **Définir** les conditions de sélection d’une personne « v*alide* »
 
 Si l’on souhaite faire évoluer l’une de ces trois fonctionnalités, nous devons forcément changer la classe *PersonProvider*.
 
@@ -106,8 +106,8 @@ La classe *Person* devient :
 
   Les modifications apportées sont :
 
--   La classe obtient le contexte de données à utiliser dans son constructeur. Elle n’a donc plus la responsabilité de l’initialiser.
--   Le code indiquant si une personne est valide ou non, est déplacé dans la classe *Person*.
+- La classe obtient le contexte de données à utiliser dans son constructeur. Elle n’a donc plus la responsabilité de l’initialiser.
+- Le code indiquant si une personne est valide ou non, est déplacé dans la classe *Person*.
 
 Dorénavant, la classe *PersonProvider*, n’a plus que la responsabilité d’appliquer des critères de sélection de personnes sur une source de données définie. Le principe **SRP** est respecté.
 

@@ -1,6 +1,6 @@
 ---
 title: Comment modifier du code spaghetti ? Méthode ETRA
-date: '2014-05-29'
+date: '2014-05-29T11:23:00'
 category: Clean code
 categories:
   - Clean code
@@ -19,19 +19,19 @@ En tant que prestataire, vous êtes-vous déjà retrouvé chez un client pour as
 
 Dans ce cas, qu’avez-vous fait ? Avez-vous :
 
--   **Accepté** et modifié le code sans rechigner :  « C’est temporaire avant d’attendre (de vendre) une refonte complète »
--   **Refusé** : « Je ne suis pas là pour faire du code de mauvaise qualité »
+- **Accepté** et modifié le code sans rechigner :  « C’est temporaire avant d’attendre (de vendre) une refonte complète »
+- **Refusé** : « Je ne suis pas là pour faire du code de mauvaise qualité »
 
 ## Expérience
 
-Il y a quelques mois, la question s’est posée pour moi. Je suis intervenu sur une application critique, en architecture client/serveur. Coté serveur, au cœur de l’application, j’ai découvert une classe de **13 000 lignes** de VB.NET avec **280 méthodes publiques**, concentrant de la logique métier, du requêtage de base de données (en clair), ainsi que des règles de validation.  
+Il y a quelques mois, la question s’est posée pour moi. Je suis intervenu sur une application critique, en architecture client/serveur. Coté serveur, au cœur de l’application, j’ai découvert une classe de **13 000 lignes** de VB.NET avec **280 méthodes publiques**, concentrant de la logique métier, du requêtage de base de données (en clair), ainsi que des règles de validation.<br />
 Imaginez le degré de risque lorsque l’on m’a demandé de modifier des règles métiers centrales de l’application dans une méthode de cette classe de **800 lignes**. Tout ça, sans **le moindre test**. Ofc.
 
 Si j’avais accepté de faire la modification comme l’entreprise le souhaitait, les conséquences auraient été multiple:
 
--   Risque très élevé d’introduction de régression
--   Des journées de réflexion intense pour quelques lignes modifiées (projection mentale pour essayer d’anticiper les éventuelles régressions)
--   Si le moindre bug survient en production, à qui la faute ? BIBI !
+- Risque très élevé d’introduction de régression
+- Des journées de réflexion intense pour quelques lignes modifiées (projection mentale pour essayer d’anticiper les éventuelles régressions)
+- Si le moindre bug survient en production, à qui la faute ? BIBI !
 
 Bien sûr, à part faire des préconisations d’amélioration de code, voire de refonte totale ou partielle, le contrat forfaitaire m’empêchait de refuser d’intervenir sur cette fonctionnalité. J’ai donc décidé de faire les choses autrement.
 
@@ -39,9 +39,9 @@ Bien sûr, à part faire des préconisations d’amélioration de code, voire de
 
 Le problème du code non testé est multiple :
 
-1.  **Rigidité**. Lors de la modification de code, il est difficile voire impossible d’en détecter les régressions. La stratégie souvent adoptée est d’ajouter des fonctionnalités en touchant le moins de choses possibles. Une fois que cela marche, on ne touche plus à rien !
-2.  **Complexité.** La conséquence directe de la rigidité, c’est la complexité. On empile les choses les unes sur les autres sans jamais prendre le temps de nettoyer et d’améliorer le code (*refactoring*). Cette complexité va donc en grandissant et la qualité en diminuant.
-3.  **Mauvaise architecture**. Mettre en place de la testabilité sur un projet nécessite de penser en amont une architecture adaptée. L’idée maîtresse est le **faible couplage**. Sans tests et malgré une conception initiale correcte, l’architecture dérive très vite vers un énorme plat de spaghettis, composé de classes statiques, de singletons et d’objets à multiples responsabilités.
+1. **Rigidité**. Lors de la modification de code, il est difficile voire impossible d’en détecter les régressions. La stratégie souvent adoptée est d’ajouter des fonctionnalités en touchant le moins de choses possibles. Une fois que cela marche, on ne touche plus à rien !
+2. **Complexité.** La conséquence directe de la rigidité, c’est la complexité. On empile les choses les unes sur les autres sans jamais prendre le temps de nettoyer et d’améliorer le code (*refactoring*). Cette complexité va donc en grandissant et la qualité en diminuant.
+3. **Mauvaise architecture**. Mettre en place de la testabilité sur un projet nécessite de penser en amont une architecture adaptée. L’idée maîtresse est le **faible couplage**. Sans tests et malgré une conception initiale correcte, l’architecture dérive très vite vers un énorme plat de spaghettis, composé de classes statiques, de singletons et d’objets à multiples responsabilités.
 
 Intervenir sur un tel code est donc **risqué**.
 
@@ -67,10 +67,10 @@ Les tests automatisés sont un moyen de contrôler cette régression. On ne peut
 
 La première étape est de déplacer le code que l’on souhaite tester, dans un environnement propice aux tests, c’est à dire le plus souvent, dans une nouvelle classe. On procède donc comme suit :
 
-1.  **Identifier** la portion de code à modifier
-2.  **Extraire ce code** dans une nouvelle méthode d’une nouvelle classe
-3.  **Ajouter les dépendances** de ce code en tant que paramètres de la méthode ou du constructeur
-4.  **Utiliser** cette classe dans le code appelant
+1. **Identifier** la portion de code à modifier
+2. **Extraire ce code** dans une nouvelle méthode d’une nouvelle classe
+3. **Ajouter les dépendances** de ce code en tant que paramètres de la méthode ou du constructeur
+4. **Utiliser** cette classe dans le code appelant
 
 C’est l’étape la plus risquée car on effectue un déplacement de code depuis un environnement non testé. Il faut donc pouvoir garantir intellectuellement (à défaut de pouvoir faire mieux) qu’aucune régression n’a été introduite. Cette étape ne doit comporter aucune modification du comportement de l’application : même si on déplace du code, on doit le conserver tel qu’il a été écrit initialement.
 
@@ -86,14 +86,14 @@ Lors de l’écriture de vos tests unitaires, vous devez créer de nouvelles imp
 
 Une fois que vous pouvez *mocker* les dépendances de votre code, vous pouvez le tester. Il faut :
 
-1.  Ajouter des tests à petite responsabilité
-2.  Étendre la couverture de test du code déplacé qui doit s’approcher des 100% 
+1. Ajouter des tests à petite responsabilité
+2. Étendre la couverture de test du code déplacé qui doit s’approcher des 100% 
 
 Cet ajout de testabilité est essentiel pour :
 
--   Contrôler la non régression de l’existant
--   Donner une meilleure vision du périmètre métier traité par le code
--   D’anticiper l’étape suivante : le *refactor*
+- Contrôler la non régression de l’existant
+- Donner une meilleure vision du périmètre métier traité par le code
+- D’anticiper l’étape suivante : le *refactor*
 
 ### Le « R » de ETRA : *Refactor*
 
@@ -103,7 +103,7 @@ Cet ajout de testabilité est essentiel pour :
 
 La troisième étape est d’effectuer un *refactor* du code existant. Dans une application qui a plusieurs années, où un certain nombre de prestataires se sont succédés, le code est souvent complexe voir illisible, car écrit par plusieurs personnes ayant chacun son style de programmation.
 
-Modifier directement ce code est souvent beaucoup plus coûteux que d’effectuer d’abord une réécriture complète ou partielle puis d’effectuer la modification. La couverture de tests de l’étape précédente permet d’effectuer cette étape avec sérénité.  
+Modifier directement ce code est souvent beaucoup plus coûteux que d’effectuer d’abord une réécriture complète ou partielle puis d’effectuer la modification. La couverture de tests de l’étape précédente permet d’effectuer cette étape avec sérénité.<br />
 
 ### Le « A » de ETRA : Add
 
@@ -256,7 +256,7 @@ La nouvelle classe créée se définit de la manière suivante :
 
 **BERK quelle méthode** ! L’idée principale de cette extraction, est de modifier **le moins de code possible**. La classe *GodClass* n’étant pas testée, il faut conserver la logique du code au maximum pour ne pas introduire de régression.
 
-Nous définissons ici une nouvelle classe responsable du calcul des indicateurs : *IndicatorCalculator*. La méthode *Calculate()* prend en paramètre toutes les dépendances, que ce soit les paramètres de sortie en référence, ou une signature de la fonction *FindAddressesForPerson*. Cette classe est maintenant testable.  
+Nous définissons ici une nouvelle classe responsable du calcul des indicateurs : *IndicatorCalculator*. La méthode *Calculate()* prend en paramètre toutes les dépendances, que ce soit les paramètres de sortie en référence, ou une signature de la fonction *FindAddressesForPerson*. Cette classe est maintenant testable.<br />
 
 ### Etape 2 : *Test*
 
@@ -298,7 +298,7 @@ L’objectif ici est de tester la classe *IndicatorCalculator* afin de pouvoir d
 
 Ce test n’est pas très propre, mais quand bien même, il permet de contrôler le comportement de la classe *IndicatorCalculator*.
 
-Une fois le code testé à quasiment 100%, nous pouvons nous retrousser les manches pour entamer le *Refactor*.  
+Une fois le code testé à quasiment 100%, nous pouvons nous retrousser les manches pour entamer le *Refactor*.<br />
 
 ### Etape 3 : *Refactor*
 

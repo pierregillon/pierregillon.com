@@ -1,6 +1,6 @@
 ---
 title: Back to code !
-date: '2019-06-05'
+date: '2019-06-05T12:36:58'
 category: Hors série
 categories:
   - Hors série

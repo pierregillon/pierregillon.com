@@ -1,6 +1,6 @@
 ---
 title: Comment migrer progressivement vers une architecture CQRS ?
-date: '2019-08-23'
+date: '2019-08-23T14:42:22'
 category: Architecture
 categories:
   - Architecture
@@ -29,17 +29,17 @@ Ce pattern consiste a **séparer** les opérations d’écriture que l’on appe
 
 Les commandes sont **des actions** (définies par un verbe) **que l’on exécute dans le système** et qui en modifie l’état. Exemple :
 
--   <u>Enregistrer</u> un nouvel utilisateur
--   <u>Supprimer</u> un produit
--   <u>Invalider</u> une commande
--   …
+- <u>Enregistrer</u> un nouvel utilisateur
+- <u>Supprimer</u> un produit
+- <u>Invalider</u> une commande
+- …
 
 Les requêtes, quant à elles, sont **des lectures de l’état du système**, elles n’en modifient pas l’état et sont le plus souvent à des données à afficher à l’utilisateur ou à fournir à un consommateur. Exemple :
 
--   La liste des derniers produits ajoutés
--   Le top 20 des meilleurs clients
--   La liste des examens groupés par patients non affiliés à un organisme
--   …
+- La liste des derniers produits ajoutés
+- Le top 20 des meilleurs clients
+- La liste des examens groupés par patients non affiliés à un organisme
+- …
 
 CQRS met en avant le fait que les responsabilités de lecture et d’écriture sont très différentes et qu’il faut donc **les séparer logiquement et physiquement**.
 
@@ -60,19 +60,19 @@ Voici un exemple simplifié de la structure d’une Web API REST dans une archit
 
 En schématisant, ils y a 3 couches logicielles principales :
 
--   *Presentation Layer* : la couche façade du système qui gère le protocole d’échange.
--   *Domain Layer* : la couche qui contient toute la logique métier, à travers des modèles.
--   *Data Layer* : la couche de persistance des données
+- *Presentation Layer* : la couche façade du système qui gère le protocole d’échange.
+- *Domain Layer* : la couche qui contient toute la logique métier, à travers des modèles.
+- *Data Layer* : la couche de persistance des données
 
 Les commandes et les requêtes, non différenciées, passent par la couche présentation qui implémente le protocole de communication (ici REST), puis par la couche métier qui contient les règles métiers (contenu dans des modèles) et enfin par la couche base de données qui contient les classes requêtant la base de données (ORM ou non).
 
 Plusieurs critiques de cette approche peuvent justifie de migrer en CQRS :
 
--   Les requêtes de données passent par la couche métier et utilisent les modèles métier alors que **ces requêtes n’évaluent** (le plus souvent) **aucun invariant métier**.
--   **Les modèles métier voit leur structure modifiée** (*domain corrupted*) en fonction des besoins d’affichage (de requêtage) de données. On obtient ainsi des objets inconsistents, très complexes, avec des champs optionnels en fonction du besoin que l’on en a.
--   Les commandes et les requêtes sont traitées à égales alors que dans la plupart des applications, **la lecture a lieu bien plus souvent que l’écriture**. (Afficher les données d’un produit est souvent une requête bien plus fréquente que la modification d’un produit).
--   Les commandes et les requêtes utilisent **le même ORM** qui peut ajouter de la complexité non nécessaire pour l’un ou pour l’autre, voir même dégrader les performances de la lecture (chargement de toute la base pour calculer un écran complexe).
--   La lecture et l’écriture utilise **la même base de données**, spécialisée pour l’une ou pour l’autre, mais jamais performante pour les deux. Impossible d’obtenir les meilleures performances (dans le cas où on en aurait besoin, ce qui est rare, mais nécessite néanmoins qu’on le souligne).
+- Les requêtes de données passent par la couche métier et utilisent les modèles métier alors que **ces requêtes n’évaluent** (le plus souvent) **aucun invariant métier**.
+- **Les modèles métier voit leur structure modifiée** (*domain corrupted*) en fonction des besoins d’affichage (de requêtage) de données. On obtient ainsi des objets inconsistents, très complexes, avec des champs optionnels en fonction du besoin que l’on en a.
+- Les commandes et les requêtes sont traitées à égales alors que dans la plupart des applications, **la lecture a lieu bien plus souvent que l’écriture**. (Afficher les données d’un produit est souvent une requête bien plus fréquente que la modification d’un produit).
+- Les commandes et les requêtes utilisent **le même ORM** qui peut ajouter de la complexité non nécessaire pour l’un ou pour l’autre, voir même dégrader les performances de la lecture (chargement de toute la base pour calculer un écran complexe).
+- La lecture et l’écriture utilise **la même base de données**, spécialisée pour l’une ou pour l’autre, mais jamais performante pour les deux. Impossible d’obtenir les meilleures performances (dans le cas où on en aurait besoin, ce qui est rare, mais nécessite néanmoins qu’on le souligne).
 
 Voyons maintenant comment migrer cette architecture progressivement en CQRS.
 
@@ -92,14 +92,14 @@ En ce qui concerne **la requête de données** (*Query*), la plupart n’utilise
 
 **Avantages** :
 
--   Plus de couplage entre de la lecture simple de données et des modèles métiers remplis de comportements
--   Les modèles de lecture (DTO) sont conçus directement en fonction des besoins d’affichage et remplis directement par la base de données.
--   Les modèles d’écriture peuvent dorénavant être structurés de manière totalement différents des modèles de lecture.
--   Possibilité d’utiliser des ORM différents, optimisés pour l’écriture vs pour la lecture (exemple: *[Dapper](https://github.com/StackExchange/Dapper)* over *[EntityFramework](https://www.entityframeworktutorial.net/)*)
+- Plus de couplage entre de la lecture simple de données et des modèles métiers remplis de comportements
+- Les modèles de lecture (DTO) sont conçus directement en fonction des besoins d’affichage et remplis directement par la base de données.
+- Les modèles d’écriture peuvent dorénavant être structurés de manière totalement différents des modèles de lecture.
+- Possibilité d’utiliser des ORM différents, optimisés pour l’écriture vs pour la lecture (exemple: *[Dapper](https://github.com/StackExchange/Dapper)* over *[EntityFramework](https://www.entityframeworktutorial.net/)*)
 
 **Inconvénients** :
 
--   Nécessite de nouvelles manières de coder qu’il faut apprendre (plusieurs modèles par usage)
+- Nécessite de nouvelles manières de coder qu’il faut apprendre (plusieurs modèles par usage)
 
 <div class="callout" style="background-color:#eaf9ff">
 
@@ -117,16 +117,16 @@ La seconde étape consiste à séparer la lecture et l’écriture dans deux app
 
 **Avantages** :
 
--   Chaque application possède un but précis : lecture ou écriture. On a donc du code de même paradigme au même endroit, ce qui facile la maintenance.
--   On peut versionner et faire évoluer les applications de manière indépendante.
--   On peut adapter le nombre d’instance de chaque application en fonction des besoins. Exemple, pour un site e-commerce qui fait énormément de lecture (recherche de produits, affichage des détails d’un produit, etc.), on peut avoir 1 seule instance d’API d’écriture et 4 ou 5 instances de lecture.
+- Chaque application possède un but précis : lecture ou écriture. On a donc du code de même paradigme au même endroit, ce qui facile la maintenance.
+- On peut versionner et faire évoluer les applications de manière indépendante.
+- On peut adapter le nombre d’instance de chaque application en fonction des besoins. Exemple, pour un site e-commerce qui fait énormément de lecture (recherche de produits, affichage des détails d’un produit, etc.), on peut avoir 1 seule instance d’API d’écriture et 4 ou 5 instances de lecture.
 
 <figure class="align-center">
   <img src="/images/blog/cqrs-load-balancing.webp" alt="" width="517" height="600" />
   <figcaption>CQRS : une API dédiée à l’écriture (2 instances) et une API dédiée à la lecture (5 instances)</figcaption>
 </figure>
 
--   On peut créer de nouvelles API de lecture spécialisées pour un support particulier. Exemple, on crée une application mobile, on peut créer en face une nouvelle API spécialisée pour le mobile (si les écrans sont très différents de l’application d’origine). On réutilise par contre l’API d’écriture : c’est elle qui contient **toutes les règles métiers**.
+- On peut créer de nouvelles API de lecture spécialisées pour un support particulier. Exemple, on crée une application mobile, on peut créer en face une nouvelle API spécialisée pour le mobile (si les écrans sont très différents de l’application d’origine). On réutilise par contre l’API d’écriture : c’est elle qui contient **toutes les règles métiers**.
 
 <figure class="align-center">
   <img src="/images/blog/cqrs-multiple-read-side.webp" alt="" width="441" height="512" />
@@ -135,8 +135,8 @@ La seconde étape consiste à séparer la lecture et l’écriture dans deux app
 
 **Inconvénients** :
 
--   Séparer en 2 applications posent la question de l’ownership de la base de données.
--   Il faut être certains que les modifications de la base de données ne sont pas cassants (breaking changes) car il faut impérativement mettre à jour le code des 2 applications.
+- Séparer en 2 applications posent la question de l’ownership de la base de données.
+- Il faut être certains que les modifications de la base de données ne sont pas cassants (breaking changes) car il faut impérativement mettre à jour le code des 2 applications.
 
 ### 3\. Deux bases de données
 
@@ -158,13 +158,13 @@ A noter que cela introduit ce que l’on appelle de l’[Eventual Consistency](h
 
 **Avantages**
 
--   Des bases adaptées à chaque besoin, donc des performances **optimales**.
+- Des bases adaptées à chaque besoin, donc des performances **optimales**.
 
 **Inconvénients** :
 
--   La synchronisation des bases de données est un programme supplémentaire à maintenir
--   Un bug dans la réplication peut entrainer un inconsistence de données qui va apparaître directement à l’utilisateur
--   Il y a maintenant 2 schémas de base de données à maintenir : il est donc plus difficile de faire évoluer la structure de données.
+- La synchronisation des bases de données est un programme supplémentaire à maintenir
+- Un bug dans la réplication peut entrainer un inconsistence de données qui va apparaître directement à l’utilisateur
+- Il y a maintenant 2 schémas de base de données à maintenir : il est donc plus difficile de faire évoluer la structure de données.
 
 <div class="callout" style="background-color:#ddfff2">
 
@@ -184,5 +184,5 @@ Cela étant dit, j’aime particulièrement l’étape 1 de transition (séparat
 
 Je vous recommande 2 très bons articles des *maîtres* :
 
--   [Martin Fowler : CQRS](https://www.martinfowler.com/bliki/CQRS.html)
--   [Greg Young : CQRS Document](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)
+- [Martin Fowler : CQRS](https://www.martinfowler.com/bliki/CQRS.html)
+- [Greg Young : CQRS Document](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)

@@ -1,6 +1,6 @@
 ---
 title: 'Behavior Driven Development, kesako ?'
-date: '2013-08-18'
+date: '2013-08-18T16:43:00'
 category: BDD
 categories:
   - BDD
@@ -21,13 +21,13 @@ Le « *Behavior Driven Development* » (BDD) est une méthode de développemen
 
 On peut définir plus précisément les acteurs de la manière suivante :
 
--   **Les personnes en charge du besoin** : ils sont le client, les représentant du client ou les experts métiers dans une entreprise. Ils connaissent parfaitement le besoin qui amène la création du produit.
--   **L’équipe de développement** : elle est l’ensemble des personnes qui tenterons de répondre aux besoins établis grâce à des outils techniques.
+- **Les personnes en charge du besoin** : ils sont le client, les représentant du client ou les experts métiers dans une entreprise. Ils connaissent parfaitement le besoin qui amène la création du produit.
+- **L’équipe de développement** : elle est l’ensemble des personnes qui tenterons de répondre aux besoins établis grâce à des outils techniques.
 
 Étrangement (ou pas), ces deux acteurs ne se fréquentent pas vraiment au quotidien. Sans exagération, aucune :
 
--   Les uns pensent des autres que ce sont des **geeks** renfermés et inintéressants de part leur propension à utiliser en permanence **un vocabulaire technique incompréhensible**. 
--   Les autres se défendent en prétendant que ces premiers sont des farfelus, des gens qui **ne savent jamais ce qu’ils veulent** et que tout est toujours mieux dans leur tête que sur le papier.
+- Les uns pensent des autres que ce sont des **geeks** renfermés et inintéressants de part leur propension à utiliser en permanence **un vocabulaire technique incompréhensible**. 
+- Les autres se défendent en prétendant que ces premiers sont des farfelus, des gens qui **ne savent jamais ce qu’ils veulent** et que tout est toujours mieux dans leur tête que sur le papier.
 
 Et pourtant dans la vraie vie, ces acteurs sont amenés à collaborer !
 
@@ -41,8 +41,8 @@ Avec ces divergences, il est souvent compliqué de se comprendre :
 
 Le BDD est un méthode qui implique les deux partis dans un processus de communication efficace. Ils sont tous deux mis à contribution et chacun doit sortir de sa zone de confort :
 
--   **Les personnes du besoin** doivent formaliser leurs besoins, leurs idées, non plus sur un document Word de 500 pages, mais selon des scénarios dans un langage structuré.
--   **L’équipe** doit s’impliquer dans le besoin, comprendre le contexte, les termes métiers importants. Elle ne reste plus dans son monde de technique de *Design Patterns*, de *Sockets*, de *Dll*, de *Batch*… 
+- **Les personnes du besoin** doivent formaliser leurs besoins, leurs idées, non plus sur un document Word de 500 pages, mais selon des scénarios dans un langage structuré.
+- **L’équipe** doit s’impliquer dans le besoin, comprendre le contexte, les termes métiers importants. Elle ne reste plus dans son monde de technique de *Design Patterns*, de *Sockets*, de *Dll*, de *Batch*… 
 
 Les questions posées aux *personnes du besoins* ou même à un membre de l’équipe ne doivent plus ressembler à :
 
@@ -66,13 +66,13 @@ Afin que les personnes du besoin et l’équipe de développement puissent se co
 
 Pour les écrire, différentes outils permettent de les normaliser, dont notamment [la syntaxe Guerkin :](https://docs.cucumber.io/gherkin/) *[Cucumber](https://docs.cucumber.io/gherkin/)*[.](https://docs.cucumber.io/gherkin/) Elle consiste à créer des scénarios structurés en différentes étapes (*Steps*) chacune commençant par des mots clés spécifiques :
 
--   Feature
--   Example (or Scenario)
--   Given, When, Then, And, But (steps)
--   Background
--   Scenario Outline (or Scenario Template)
--   Examples
--   …
+- Feature
+- Example (or Scenario)
+- Given, When, Then, And, But (steps)
+- Background
+- Scenario Outline (or Scenario Template)
+- Examples
+- …
 
 Selon les outils implémentant *Cucumber*, il est bien sûr possible d’écrire en français chaque mot clé. C’est plus pratique d’exprimer un besoin dans la langue de Molière !
 
@@ -80,12 +80,12 @@ Exemple pour un comportement graphique :
 
 <div class="callout" style="background-color:#eff9ff">
 
-**Scénario**: Activation du bouton de validation du formulaire de patient  
-– **Etant donné** le formulaire de création de patient ouvert  
-– **Et** le bouton « *Valider* » est inactif  
-– **Quand** je saisie le nom « *Test*«   
-– **Et** je saisi le prénom « *Test*«   
-– **Et** je saisi l’âge « *18*«   
+**Scénario**: Activation du bouton de validation du formulaire de patient<br />
+– **Etant donné** le formulaire de création de patient ouvert<br />
+– **Et** le bouton « *Valider* » est inactif<br />
+– **Quand** je saisie le nom « *Test*« <br />
+– **Et** je saisi le prénom « *Test*« <br />
+– **Et** je saisi l’âge « *18*« <br />
 – **Alors** le bouton « Valider » devient actif
 
 </div>
@@ -94,11 +94,11 @@ Exemple pour un comportement purement métier :
 
 <div class="callout" style="background-color:#e8f8ff">
 
-**Scénario**: Ajout d’articles dans un panier d’achat  
-– **Etant donné** un panier vide  
-– **Quand** j’ajoute un article de **8** euros dans le panier  
-– **Et** j’ajoute un article de **10** euros dans le panier  
-– **Alors** le montant du panier est automatiquement calculé  
+**Scénario**: Ajout d’articles dans un panier d’achat<br />
+– **Etant donné** un panier vide<br />
+– **Quand** j’ajoute un article de **8** euros dans le panier<br />
+– **Et** j’ajoute un article de **10** euros dans le panier<br />
+– **Alors** le montant du panier est automatiquement calculé<br />
 –**Et** le montant du panier vaut **18** euros
 
 </div>
@@ -107,18 +107,18 @@ Les scénarios peuvent être aussi « *variabilisés* » avec des exemples. Ce
 
 <div class="callout" style="background-color:#eaf9ff">
 
-**Scénario** : Authentification sur un portail  
-–**Etant donné** un compte de login « *admin* » et de mot de passe « *admin159* » valide  
-– **Quand** j’ouvre le formulaire d’authentification  
-– **Et** je saisis l’identifiant « <*login*\> »  
-– **Et** je saisi le mot de passe « <*password*\> »  
-– **Et** je valide le formulaire  
-– **Alors** le message d’erreur « <*message*\> » s’affiche  
-– **Exemples**:  
-| *login*  |*password* | *message*  
-| admin  | admin | L’identifiant ou le mot de passe est invalide.  
-| admin2 | admin159 | L’identifiant ou le mot de passe est invalide.  
-| admin2 | admin2| L’identifiant ou le mot de passe est invalide.  
+**Scénario** : Authentification sur un portail<br />
+–**Etant donné** un compte de login « *admin* » et de mot de passe « *admin159* » valide<br />
+– **Quand** j’ouvre le formulaire d’authentification<br />
+– **Et** je saisis l’identifiant « <*login*\> »<br />
+– **Et** je saisi le mot de passe « <*password*\> »<br />
+– **Et** je valide le formulaire<br />
+– **Alors** le message d’erreur « <*message*\> » s’affiche<br />
+– **Exemples**:<br />
+| *login*  |*password* | *message*<br />
+| admin  | admin | L’identifiant ou le mot de passe est invalide.<br />
+| admin2 | admin159 | L’identifiant ou le mot de passe est invalide.<br />
+| admin2 | admin2| L’identifiant ou le mot de passe est invalide.<br />
 |admin  |admin159|
 
 </div>
@@ -150,49 +150,49 @@ Depuis sa création, la communauté s’est saisie du BDD et sa définition à l
 
 ## Exemple complet en C# avec SpecFlow
 
-Pour un exemple complet de l’utilisation des scénarios via la méthodologie BDD, rendez-vous à **[l’article du Kata Potter](http://box5594.temp.domains/~pierregi/bdd-lexemple-du-kata-potter/)**.
+Pour un exemple complet de l’utilisation des scénarios via la méthodologie BDD, rendez-vous à **[l’article du Kata Potter](/bdd-lexemple-du-kata-potter/)**.
 
 ## Les avantages du BDD pour l’équipe technique
 
--   **Avantages techniques**
-    -   permet de **générer des tests unitaires** pour piloter le développement
-    -   permet de **structurer un design** de classes piloté par le métier
-    -   permet d’**obtenir des spécifications claires, concises et vivantes** : elles évoluent en fonction des besoins et restent toujours **en accord avec le code !**
-    -   permet d’**obtenir un « cahier de recette » automatisé** : plus besoin d’un n ème intermédiaire, appelé aussi « Testeur », pour jouer et rejouer les scénarios. Les scénarios en BDD entrent dans l’intégration continue et les tests automatisés.
--   **Avantages humains**
-    -   permet d’**adopter naturellement le langage du besoin, le domaine**
-    -   permet de comprendre, d’être compris par le client et de proposer des idées pertinentes avec son besoin.
+- **Avantages techniques**
+    - permet de **générer des tests unitaires** pour piloter le développement
+    - permet de **structurer un design** de classes piloté par le métier
+    - permet d’**obtenir des spécifications claires, concises et vivantes** : elles évoluent en fonction des besoins et restent toujours **en accord avec le code !**
+    - permet d’**obtenir un « cahier de recette » automatisé** : plus besoin d’un n ème intermédiaire, appelé aussi « Testeur », pour jouer et rejouer les scénarios. Les scénarios en BDD entrent dans l’intégration continue et les tests automatisés.
+- **Avantages humains**
+    - permet d’**adopter naturellement le langage du besoin, le domaine**
+    - permet de comprendre, d’être compris par le client et de proposer des idées pertinentes avec son besoin.
 
 Un point très intéressant du BDD : **un problème technique reflète presque toujours un manque ou une incohérence fonctionnelle**. J’ai pu le constater personnellement à maintes reprises. Lorsqu’en tant que développeur nous sommes confrontés à un bug, à un problème technique ou un problème de conception, c’est presque automatiquement : 
 
--   soit une **erreur de compréhension du métier**
--   soit une **mauvaise écriture des scénarios métier**
+- soit une **erreur de compréhension du métier**
+- soit une **mauvaise écriture des scénarios métier**
 
 ## Les avantages du BDD pour les personnes du métier
 
--   **permet de guider l’écriture du besoin** : la syntaxe étant très contraignante, elle aide à cerner précisément le besoin et banni le superflu.
--   **aide à prioriser le besoin**
--   **permet de mieux se faire comprendre** : il n’y a pas de garantie mais un besoin écrit avec un langage intermédiaire établit de manière claire entre les partis, a de meilleurs chances d’être compris par un équipier qu’**un mail de 400 lignes** ou un document Word écrit de bonne volonté.
+- **permet de guider l’écriture du besoin** : la syntaxe étant très contraignante, elle aide à cerner précisément le besoin et banni le superflu.
+- **aide à prioriser le besoin**
+- **permet de mieux se faire comprendre** : il n’y a pas de garantie mais un besoin écrit avec un langage intermédiaire établit de manière claire entre les partis, a de meilleurs chances d’être compris par un équipier qu’**un mail de 400 lignes** ou un document Word écrit de bonne volonté.
 
 ## Les inconvénients du BDD
 
 Malgré tous ces avantages, la méthodologie BDD possède néanmoins quelques inconvénients :
 
--   **Très forte implication des personnes du besoin.** En effet, ils ont la responsabilité d’écrire les différents scénarios à implémenter.
--   **L’écriture des scénarios force à re-re-re-réfléchir.** Et oui, cela peut être vu comme un inconvénient surtout par les personnes ayant la vision métier mais répétant sans cesse : « Ne me pose pas la question, c’est écrit dans le document 15, paragraphe 501, ligne 135 ! ». Ecrire les scénarios, même complexe, c’est se replonger dans le besoin et **être pragmatique sur ce que l’on souhaite modéliser**. Un exercice intellectuel qui est loin d’être facile, même pour les personnes ayant la meilleure vision des besoins.
--   **Forte implication de l’équipe**. En effet, l’équipe doit s’impliquer dans le processus et jouer le jeu. Les scénarios doivent être implémentés et **bien** ! Chaque membre de l’équipe est responsable des fonctionnalités implémentées.
+- **Très forte implication des personnes du besoin.** En effet, ils ont la responsabilité d’écrire les différents scénarios à implémenter.
+- **L’écriture des scénarios force à re-re-re-réfléchir.** Et oui, cela peut être vu comme un inconvénient surtout par les personnes ayant la vision métier mais répétant sans cesse : « Ne me pose pas la question, c’est écrit dans le document 15, paragraphe 501, ligne 135 ! ». Ecrire les scénarios, même complexe, c’est se replonger dans le besoin et **être pragmatique sur ce que l’on souhaite modéliser**. Un exercice intellectuel qui est loin d’être facile, même pour les personnes ayant la meilleure vision des besoins.
+- **Forte implication de l’équipe**. En effet, l’équipe doit s’impliquer dans le processus et jouer le jeu. Les scénarios doivent être implémentés et **bien** ! Chaque membre de l’équipe est responsable des fonctionnalités implémentées.
 
 ## Les erreurs les plus courantes
 
 Voici quelques exemples d’erreurs les plus courantes lors de l’utilisation de la méthodologie BDD :
 
--   **L’équipe écrit ou modifie les scénarios sans l’accord des personnes du besoin.** La méthodologie du BDD consiste à être au plus proche du besoin. Si l’équipe modifie les scénarios, on risque de s’éloigner du besoin originel voir même de **créer des fonctionnalités inutiles**.
--   **Les scénarios ne sont pas implémentables**. Ce problème vient d’un mauvais compromis entre les deux partis. Les contraintes d’implémentions doivent être mises au claire lors de la formulation de la nomenclature d’écriture. Exemple de formulation très difficile à implémenter :
-    -   **Etant donné** un utilisateur qui n’est pas ‘administrateur’
-    -   **Etant donné** pour tous les mots de passe non valides
-    -   **Quand** je ne clique pas …
-    -   **Alors** tout va bien
--   **Les scénarios ne sont pas implémentés correctement.** La plupart du temps, les scénarios sont assez clairs pour être implémentés par l’équipe sans difficulté en terme de compréhension. Cependant, certains peuvent être très compliqués. Un scénario mal implémenté correspond souvent à un scénario qu’**un développeur n’a vraiment pas compris**. Il faut favoriser les communications entre les acteurs, même pendant l’implémentation de scénarios. Si un scénario est compliqué, il faut pouvoir entamer la discussion avec les membres de l’équipe ou la personne du besoin en charge de les écrire. Seul l’échange peut éclaircir rapidement l’incompréhension.
+- **L’équipe écrit ou modifie les scénarios sans l’accord des personnes du besoin.** La méthodologie du BDD consiste à être au plus proche du besoin. Si l’équipe modifie les scénarios, on risque de s’éloigner du besoin originel voir même de **créer des fonctionnalités inutiles**.
+- **Les scénarios ne sont pas implémentables**. Ce problème vient d’un mauvais compromis entre les deux partis. Les contraintes d’implémentions doivent être mises au claire lors de la formulation de la nomenclature d’écriture. Exemple de formulation très difficile à implémenter :
+    - **Etant donné** un utilisateur qui n’est pas ‘administrateur’
+    - **Etant donné** pour tous les mots de passe non valides
+    - **Quand** je ne clique pas …
+    - **Alors** tout va bien
+- **Les scénarios ne sont pas implémentés correctement.** La plupart du temps, les scénarios sont assez clairs pour être implémentés par l’équipe sans difficulté en terme de compréhension. Cependant, certains peuvent être très compliqués. Un scénario mal implémenté correspond souvent à un scénario qu’**un développeur n’a vraiment pas compris**. Il faut favoriser les communications entre les acteurs, même pendant l’implémentation de scénarios. Si un scénario est compliqué, il faut pouvoir entamer la discussion avec les membres de l’équipe ou la personne du besoin en charge de les écrire. Seul l’échange peut éclaircir rapidement l’incompréhension.
 
 ## Conclusion
 

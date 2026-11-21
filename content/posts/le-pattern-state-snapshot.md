@@ -1,6 +1,6 @@
 ---
 title: 'Persister un pur domain model : le pattern State-Snapshot'
-date: '2019-06-12'
+date: '2019-06-12T13:38:53'
 category: Clean code
 categories:
   - Clean code
@@ -11,7 +11,7 @@ excerpt: "Dans cet article, nous allons aborder le pattern\_State-Snapshot, un a
 
 Dans cet article, nous allons aborder le pattern ***State-Snapshot***, un autre pattern séparant *DomainModel* et *PersistentModel*.
 
-Dans le **[précédent article](/persister-un-pur-domain-model-le-pattern-state-interface/)**, nous avons vu le pattern ***State-Interface*** permettant de séparer le *modèle métier*, qui a pour rôle d’exprimer les règles du domaine, et le *modèle de persistance*, qui doit en persister les états. La connexion entre ces deux modèles se fait via une interface, implémentée dans chacun d’eux.
+Dans le **[précédent article](/le-pattern-state-interface/)**, nous avons vu le pattern ***State-Interface*** permettant de séparer le *modèle métier*, qui a pour rôle d’exprimer les règles du domaine, et le *modèle de persistance*, qui doit en persister les états. La connexion entre ces deux modèles se fait via une interface, implémentée dans chacun d’eux.
 
 Pour le *State-Snapshot*, plus d’interface, mais un objet d’état.
 
@@ -19,15 +19,15 @@ Pour le *State-Snapshot*, plus d’interface, mais un objet d’état.
 
 Cet article technique fait partie de la série qui porte sur la question : « *Comment persister un modèle métier sans devoir simplifier sa conception objet et sans devoir se plier aux conventions des ORMs* ? ». Voici les autres articles :
 
--   [Introduction](/persister-un-pur-domain-model-pas-si-simple/)
--   [Faire un compromis sur la conception objet](/persister-un-pur-domain-model-compromis-sur-la-conception-objet/)
--   [Le pattern State-Interface](/persister-un-pur-domain-model-le-pattern-state-interface/)
--   **Le pattern State-Snapshot**
--   L’event sourcing
+- [Introduction](/persister-un-pur-domain-model-pas-si-simple/)
+- [Faire un compromis sur la conception objet](/compromis-sur-la-conception-objet/)
+- [Le pattern State-Interface](/le-pattern-state-interface/)
+- **Le pattern State-Snapshot**
+- L’event sourcing
 
 ## Le pattern *State-Snapshot*
 
-Ce pattern consiste à prendre un ***snapshot*** ou ***photo*** de l’état interne d’un *modèle métier* et de le persister dans une structure de données*.* Ce pattern est inspiré de l’*event sourcing*.
+Ce pattern consiste à prendre un ***snapshot*** ou ***photo*** de l’état interne d’un *modèle métier* et de le persister dans une structure de données<em>.</em> Ce pattern est inspiré de l’*event sourcing*.
 
 Voici un schéma décrivant les différentes étapes :
 
@@ -37,14 +37,14 @@ Voici un schéma décrivant les différentes étapes :
 
 **Les étapes de fonctionnement du pattern pour une *écriture* :**
 
-1.  Des actions sont exécutées via des méthodes sur l*‘ objet métier*. L’état interne de l’objet se met à jour. Il n’est pas accessible depuis l’extérieur de l’objet.
-2.  Lors de l’appel de la méthode .*TakeSnapShot*(), un objet *snapshot* est créé et retourné, contenant l’ensemble des états de l’objet métier à persister.
-3.  L’objet *snapshot* est sauvegardé en base de données
+1. Des actions sont exécutées via des méthodes sur l<em>‘ objet métier</em>. L’état interne de l’objet se met à jour. Il n’est pas accessible depuis l’extérieur de l’objet.
+2. Lors de l’appel de la méthode .*TakeSnapShot*(), un objet *snapshot* est créé et retourné, contenant l’ensemble des états de l’objet métier à persister.
+3. L’objet *snapshot* est sauvegardé en base de données
 
 **Les étapes de fonctionnement du pattern pour une *lecture* :**
 
-1.  Un objet *snapshot* est rechargé depuis la base de données
-2.  Le *snapshot* est injecté dans une instance de l’objet du métier via la méthode *.LoadSnapshot()*, ce qui restaure son état.
+1. Un objet *snapshot* est rechargé depuis la base de données
+2. Le *snapshot* est injecté dans une instance de l’objet du métier via la méthode *.LoadSnapshot()*, ce qui restaure son état.
 
 Le principal intérêt de passer par un objet dit *snapshot*, est que comme c’est le *modèle métier* qui le construit, il n’a pas besoin d’exposer ses états internes propres et reste donc parfaitement encapsulé.
 
@@ -94,7 +94,7 @@ Pour la classe *OrderLine* :
 
 ### 2\. Implémenter .*TakeSnapshot*() dans les objets métiers
 
-Pour créer l’objet *OrderState*, à persister, on implémente l’interface *IStateSnapshotable<OrderState>*, et en particulier la méthode .*TakeSnapshot*(). Ici, j’ai choisi d’implémenter en interface explicite, ce qui n’est pas obligatoire.
+Pour créer l’objet *OrderState*, à persister, on implémente l’interface *IStateSnapshotable\<OrderState>*, et en particulier la méthode .*TakeSnapshot*(). Ici, j’ai choisi d’implémenter en interface explicite, ce qui n’est pas obligatoire.
 
 ```csharp {3}
     public class Order : IOrder, IStateSnapshotable<OrderState>
@@ -241,21 +241,21 @@ Et Voilà.
 
 **Avantages** :
 
--   La classe métier ***Order*** reste parfaitement encapsulée et intègre. On peut concevoir son métier sans contraintes.
--   Il y a une séparation claire entre le modèle métier et le modèle de persistance (*Domain model* vs *Persistant model*). On peut donc avoir des classes drastiquement différentes.
--   Les méta-données requises par les ORM pour permettre la persistance sont ajoutées dans les *Persistent Models* et ne polluent pas nos *Domain Models*.
+- La classe métier ***Order*** reste parfaitement encapsulée et intègre. On peut concevoir son métier sans contraintes.
+- Il y a une séparation claire entre le modèle métier et le modèle de persistance (*Domain model* vs *Persistant model*). On peut donc avoir des classes drastiquement différentes.
+- Les méta-données requises par les ORM pour permettre la persistance sont ajoutées dans les *Persistent Models* et ne polluent pas nos *Domain Models*.
 
 **Inconvénients** :
 
--   Le code d’implémentation implicite ajoute un peu de tuyauterie dans l’objet métier *Order*.
--   On confie à un modèle métier de produire un *snapshot* ou *photo* de son état interne. Est-ce réellement de sa responsabilité ?
--   Le nombre de classe est plus important
+- Le code d’implémentation implicite ajoute un peu de tuyauterie dans l’objet métier *Order*.
+- On confie à un modèle métier de produire un *snapshot* ou *photo* de son état interne. Est-ce réellement de sa responsabilité ?
+- Le nombre de classe est plus important
 
 ## Conclusion
 
 Ce pattern est particulièrement intéressant car il crée **une nette séparation entre *Domain Models* et *Persistent Models***. Nous masquons ainsi les problématiques de persistance à nos objets métiers. Nous pouvons tisser un domaine métier complexe, à travers l’interaction de nombreuses classes purement concentrées sur l’expression du besoin.
 
-Contrairement au *[State-Interface](/persister-un-pur-domain-model-le-pattern-state-interface/)*, l’interface à implémenter représente bien ici **un comportement et non un état** : la capacité à lire et prendre une photo de l’état interne d’un objet métier. (*ISnapshotable*)
+Contrairement au *[State-Interface](/le-pattern-state-interface/)*, l’interface à implémenter représente bien ici **un comportement et non un état** : la capacité à lire et prendre une photo de l’état interne d’un objet métier. (*ISnapshotable*)
 
 ## Code
 
