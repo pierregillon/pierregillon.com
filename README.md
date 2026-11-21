@@ -18,8 +18,11 @@ npm run lint    # vérification ESLint
 
 ## Déploiement
 
-`npm run build` produit le dossier `out/`, à publier tel quel sur n'importe quel hébergement statique
-(Cloudflare Pages, Netlify, GitHub Pages, Vercel, OVH…). La page `out/404.html` sert de page d'erreur.
+Le site est hébergé sur **GitHub Pages** : chaque push sur `main` déclenche le workflow
+`.github/workflows/deploy.yml`, qui construit le site et le publie sur https://pierregillon.com.
+
+`npm run build` produit le dossier `out/`, qui peut aussi être publié tel quel sur n'importe quel autre
+hébergement statique. La page `out/404.html` sert de page d'erreur.
 
 Les URLs de l'ancien site sont conservées (`/mon-offre/`, `/blog/`, `/about/`, `/<slug-de-l-article>/`).
 
