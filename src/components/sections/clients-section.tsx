@@ -137,7 +137,7 @@ export function ClientsSection() {
             <SectionTitle lead="J'ai travaillé" accent="pour" />
           </Reveal>
           <Reveal animation="fadeInUp" className="mt-5">
-            <p className="copy text-center text-muted-foreground">
+            <p className="copy text-center leading-6 text-muted-foreground">
               Au cours de ces dernières années, j&apos;ai travaillé dans des secteurs très variés, chez des éditeurs
               de logiciels, des ESN, des grandes entreprises et des startups.
             </p>

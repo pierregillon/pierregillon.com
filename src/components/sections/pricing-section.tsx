@@ -76,7 +76,7 @@ const palette = {
   orange: { background: "bg-[url(/images/bg/pricing-premium.png)]", price: "text-orange", icon: "text-orange" },
 } as const;
 
-function PricingCard({ plan, descriptionClassName }: { plan: Plan; descriptionClassName?: string }) {
+function PricingCard({ plan, headingDescription }: { plan: Plan; headingDescription?: boolean }) {
   const colors = palette[plan.color];
 
   return (
@@ -103,7 +103,7 @@ function PricingCard({ plan, descriptionClassName }: { plan: Plan; descriptionCl
       >
         {plan.price}
       </p>
-      <p className={cn("title-card text-ink uppercase", descriptionClassName)}>{plan.description}</p>
+      <p className={cn("text-ink", headingDescription ? "title-md" : "title-card uppercase")}>{plan.description}</p>
       <ul className="font-open my-2.5 flex-1 text-base text-ink">
         {plan.features.map((feature) => (
           <li key={feature} className="flex items-center not-last:pb-[7.5px] not-first:mt-[7.5px]">
@@ -125,12 +125,12 @@ function PricingCard({ plan, descriptionClassName }: { plan: Plan; descriptionCl
 }
 
 type PricingSectionProps = {
-  /** Classes du texte d'accroche de chaque offre (la page "Mon offre" l'affiche en Oswald). */
-  descriptionClassName?: string;
+  /** Affiche l'accroche de chaque formule en police de titre (Oswald), comme sur la page "Mon offre". */
+  headingDescription?: boolean;
 };
 
 /** Section "Mes tarifs" : les trois formules d'accompagnement. */
-export function PricingSection({ descriptionClassName }: PricingSectionProps) {
+export function PricingSection({ headingDescription }: PricingSectionProps) {
   return (
     <section className="overflow-hidden bg-surface py-[60px]">
       <div data-parallax-range className="relative my-[5%] flex flex-col items-center gap-5">
@@ -139,7 +139,7 @@ export function PricingSection({ descriptionClassName }: PricingSectionProps) {
             <SectionTitle lead="Mes" accent="Tarifs" />
           </Reveal>
           <Reveal animation="fadeInUp" className="mt-5">
-            <p className="copy text-center text-muted-foreground">
+            <p className="copy text-center leading-6 text-muted-foreground">
               Je propose différents tarifs en fonction de l&apos;accompagnement que vous souhaitez. Ces tarifs sont
               indicatifs et peuvent varier en fonction de la durée de mission, la taille de l&apos;entreprise et des
               responsabilités occupées.
@@ -174,12 +174,12 @@ export function PricingSection({ descriptionClassName }: PricingSectionProps) {
         <Reveal animation="fadeInUp" className="relative z-1 mt-[30px] w-full">
           <div className="mx-auto flex max-w-[1100px] flex-col items-stretch justify-center gap-2.5 md:flex-row">
             {plans.map((plan) => (
-              <PricingCard key={plan.name} plan={plan} descriptionClassName={descriptionClassName} />
+              <PricingCard key={plan.name} plan={plan} headingDescription={headingDescription} />
             ))}
           </div>
         </Reveal>
 
-        <p className="copy mb-[0.9rem] text-black md:w-[48%]">
+        <p className="copy mb-[0.9rem] w-[48%] text-black">
           &nbsp;* pour la rémunération{" "}
           <strong>
             <em>founding engineer</em>

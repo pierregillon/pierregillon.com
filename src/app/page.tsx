@@ -27,7 +27,7 @@ export default function HomePage() {
       <PracticesSection />
       <ClientsSection />
       <PricingSection />
-      <CtaSection />
+      <CtaSection maxWidth={985} />
       <LatestPostsSection />
     </>
   );
@@ -196,7 +196,7 @@ function PracticesSection() {
               <SectionTitle lead="Mes pratiques en" accent="détail" />
             </Reveal>
             <Reveal animation="fadeInUp" className="mt-5">
-              <p className="copy text-center text-muted-foreground">
+              <p className="copy text-center leading-6 text-muted-foreground">
                 Voici les pratiques que je mets en place dans le développement de votre produit.
               </p>
             </Reveal>
